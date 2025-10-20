@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Lecturer Scheduling System - Project Details</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Garamond', serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #2c2c2c;
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 100px rgba(212, 175, 55, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            border-radius: 20px 20px 0 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #d4af37;
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+            border: 2px solid #d4af37;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(45deg, #d4af37, #f4e5c3, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            color: #f4e5c3;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+            margin: 5px 0;
+        }
+
+        h2 {
+            color: #1a1a2e;
+            font-weight: 400;
+            font-size: 2.2em;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, #d4af37, #f4e5c3, transparent) 1;
+            padding-bottom: 15px;
+            margin-top: 50px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, transparent);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        h3 {
+            color: #2c2c2c;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 4px solid #d4af37;
+            position: relative;
+            font-weight: 400;
+        }
+
+        h3::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #d4af37, #f4e5c3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 40px 0;
+            box-shadow: 0 1px 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .project-overview {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(244, 229, 195, 0.08) 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid #d4af37;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .project-overview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #d4af37, #f4e5c3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            border-radius: 12px 0 0 12px;
+        }
+
+        p {
+            color: #3c3c3c;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        li {
+            margin: 15px 0;
+            line-height: 1.9;
+            color: #3c3c3c;
+            position: relative;
+            padding-left: 10px;
+        }
+
+        ul li::before {
+            content: '◆';
+            position: absolute;
+            left: -20px;
+            color: #d4af37;
+            font-size: 0.8em;
+        }
+
+        ol li {
+            padding-left: 0;
+        }
+
+        .features-list {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(244, 229, 195, 0.05) 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        strong {
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #d4af37;
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        table td {
+            padding: 18px 15px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            color: #3c3c3c;
+        }
+
+        table tr:nth-child(even) {
+            background-color: rgba(212, 175, 55, 0.03);
+        }
+
+        table tr:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(244, 229, 195, 0.08) 100%);
+            transition: background 0.3s ease;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #d4af37, #f4e5c3);
+            color: #1a1a2e;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95em;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid #d4af37;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #f4e5c3, #d4af37);
+        }
+
+        .navigation {
+            text-align: center;
+            margin: 50px 0 30px 0;
+        }
+
+        .navigation h2 {
+            border: none;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .navigation h2::before {
+            display: none;
+        }
+
+        .navigation a {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #d4af37, #f4e5c3);
+            color: #1a1a2e;
+            text-decoration: none;
+            border-radius: 30px;
+            margin: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
+            border: 2px solid #d4af37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navigation a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .navigation a:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .navigation a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #f4e5c3, #d4af37);
+        }
+
+        .project-overview a {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .project-overview a:hover {
+            border-bottom: 2px solid #d4af37;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #d4af37;
+            margin-top: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+            border: 2px solid #d4af37;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            color: #f4e5c3;
+            margin: 8px 0;
+            font-size: 1.05em;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 30px;
+                margin: 20px auto;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .tech-stack {
+                justify-content: center;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            table th,
+            table td {
+                padding: 12px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smart Lecturer Scheduling, Availability & Navigation System</h1>
+            <p>Faculty of Natural Sciences, Mathematical Sciences and Computing Department</p>
+            <p>Walter Sisulu University</p>
+        </header>
+
+        <h2>Project Overview</h2>
+        <div class="project-overview">
+            <p>
+                The Smart Lecturer Scheduling, Availability and Navigation System is an innovative mobile application 
+                designed to streamline the appointment booking process between students and faculty members at 
+                Walter Sisulu University. This system eliminates the challenges of manual scheduling and provides 
+                a seamless, user-friendly experience for both students and lecturers.
+            </p>
+        </div>
+
+        <hr>
+
+        <h2>Problem Statement</h2>
+        <p>
+            The traditional process of scheduling appointments with lecturers can be time-consuming and frustrating 
+            for students. Common challenges include:
+        </p>
+        <ul>
+            <li>Difficulty in finding lecturers on campus</li>
+            <li>Lack of real-time availability information</li>
+            <li>Manual scheduling processes that lead to double-bookings</li>
+            <li>No centralized system for managing appointments</li>
+            <li>Time wasted searching for lecturer offices</li>
+            <li>Inefficient communication between students and faculty</li>
+        </ul>
+
+        <hr>
+
+        <h2>Project Objectives</h2>
+        <p>The main objectives of this project are:</p>
+        <ol>
+            <li>Develop an intuitive mobile application for appointment scheduling</li>
+            <li>Implement real-time availability tracking for lecturers</li>
+            <li>Provide indoor navigation to lecturer offices</li>
+            <li>Enable students to view and book available time slots</li>
+            <li>Allow users to manage and cancel appointments easily</li>
+            <li>Reduce administrative burden on faculty members</li>
+            <li>Improve communication between students and lecturers</li>
+        </ol>
+
+        <hr>
+
+        <h2>Key Features</h2>
+        <div class="features-list">
+            <h3>For Students:</h3>
+            <ul>
+                <li><strong>Smart Scheduling:</strong> Browse available time slots and book appointments with ease</li>
+                <li><strong>Real-Time Status:</strong> View lecturer availability (available, busy, in a meeting)</li>
+                <li><strong>Indoor Navigation:</strong> Get directions to lecturer offices within the campus</li>
+                <li><strong>Appointment Management:</strong> Cancel or reschedule appointments as needed</li>
+                <li><strong>Notifications:</strong> Receive reminders about upcoming appointments</li>
+            </ul>
+
+            <h3>For Lecturers:</h3>
+            <ul>
+                <li><strong>Availability Management:</strong> Set and update availability status in real-time</li>
+                <li><strong>Appointment Overview:</strong> View all scheduled appointments in one place</li>
+                <li><strong>Calendar Integration:</strong> Sync with existing calendar systems</li>
+                <li><strong>Student Information:</strong> Access relevant student details for scheduled meetings</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2>Technology Stack</h2>
+        <div class="tech-stack">
+            <span class="tech-item">React</span>
+            <span class="tech-item">Vite</span>
+            <span class="tech-item">JavaScript</span>
+            <span class="tech-item">TailwindCSS</span>
+            <span class="tech-item">Node.js</span>
+            <span class="tech-item">Express</span>
+            <span class="tech-item">MongoDB</span>
+            <span class="tech-item">RESTful API</span>
+        </div>
+
+        <hr>
+
+        <h2>Team Members</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Student Number</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bathabile Ngxishe</td>
+                    <td>222169699</td>
+                    <td>Tester</td>
+                </tr>
+                <tr>
+                    <td>Mpho Makgonya Mabapa</td>
+                    <td>230326919</td>
+                    <td>Project Manager</td>
+                </tr>
+                <tr>
+                    <td>Marumo Lerato Matome</td>
+                    <td>231354959</td>
+                    <td>Frontend Developer</td>
+                </tr>
+                <tr>
+                    <td>Matsie Sarah Bopape</td>
+                    <td>230630758</td>
+                    <td>Backend Developer</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>Project Timeline</h2>
+        <ol>
+            <li><strong>Phase 1 - Planning & Design (Weeks 1-2):</strong> Requirements gathering, UI/UX design, Database schema design</li>
+            <li><strong>Phase 2 - Development (Weeks 3-8):</strong> Frontend development, Backend API development, Database implementation</li>
+            <li><strong>Phase 3 - Integration (Weeks 9-10):</strong> System integration, Navigation features implementation</li>
+            <li><strong>Phase 4 - Testing (Weeks 11-12):</strong> Unit testing, Integration testing, User acceptance testing</li>
+            <li><strong>Phase 5 - Deployment (Weeks 13-14):</strong> Deployment to production, User training, Documentation</li>
+        </ol>
+
+        <hr>
+
+        <h2>Expected Outcomes</h2>
+        <ul>
+            <li>Reduced time spent by students searching for lecturers</li>
+            <li>Improved efficiency in appointment scheduling</li>
+            <li>Better time management for both students and faculty</li>
+            <li>Enhanced communication within the department</li>
+            <li>Increased student satisfaction with academic support services</li>
+            <li>Data-driven insights into consultation patterns</li>
+        </ul>
+
+        <hr>
+
+        <h2>Project Demo</h2>
+        <div class="project-overview">
+            <p><strong>Live Demo URL:</strong></p>
+            <p><a href="https://real-time-full-stack-ry8k.bolt.host/" target="_blank">https://real-time-full-stack-ry8k.bolt.host/</a></p>
+            <p style="margin-top: 15px;">
+                Visit the live demo to explore the features and functionality of the Smart Lecturer Scheduling System.
+            </p>
+        </div>
+
+        <hr>
+
+        <div class="navigation">
+            <h2>Navigation</h2>
+            <a href="index.html">Back to Home Page</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Walter Sisulu University</p>
+            <p>Faculty of Natural Sciences, Mathematical Sciences and Computing Department</p>
+            <p>Smart Lecturer Scheduling System - Team Project</p>
+        </footer>
+    </div>
+</body>
+</html>

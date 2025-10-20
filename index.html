@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bathabile Ngxishe</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', 'Garamond', serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #2c2c2c;
+      line-height: 1.8;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #d4af37;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+      border-bottom: 3px solid #d4af37;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+      animation: shimmer 8s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(180deg); }
+    }
+
+    header h1 {
+      font-size: 3em;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(45deg, #d4af37, #f4e5c3, #d4af37);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .container {
+      width: 85%;
+      max-width: 1200px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.98);
+      padding: 60px;
+      border-radius: 20px;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 100px rgba(212, 175, 55, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(244, 229, 195, 0.05) 100%);
+      border-radius: 15px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .profile img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin-right: 40px;
+      object-fit: cover;
+      border: 5px solid #d4af37;
+      box-shadow: 
+        0 10px 30px rgba(212, 175, 55, 0.4),
+        0 0 0 10px rgba(212, 175, 55, 0.1),
+        inset 0 0 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile img:hover {
+      transform: scale(1.05);
+      box-shadow: 
+        0 15px 40px rgba(212, 175, 55, 0.6),
+        0 0 0 10px rgba(212, 175, 55, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info {
+      flex: 1;
+    }
+
+    h1, h2, h3 {
+      color: #1a1a2e;
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 2.2em;
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(90deg, #d4af37, #f4e5c3, transparent) 1;
+      padding-bottom: 15px;
+      margin-top: 40px;
+      display: inline-block;
+      width: 100%;
+      position: relative;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, #d4af37, transparent);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    h3 {
+      font-size: 1.5em;
+      color: #2c2c2c;
+      margin-top: 30px;
+      padding-left: 20px;
+      border-left: 4px solid #d4af37;
+      position: relative;
+    }
+
+    h3::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #d4af37, #f4e5c3);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: #3c3c3c;
+      font-size: 1.05em;
+    }
+
+    ul {
+      padding-left: 40px;
+      margin-top: 15px;
+    }
+
+    ul li {
+      margin: 12px 0;
+      color: #3c3c3c;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    ul li::before {
+      content: '◆';
+      position: absolute;
+      left: -20px;
+      color: #d4af37;
+      font-size: 0.8em;
+    }
+
+    ul li strong {
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+
+    .links a {
+      display: inline-block;
+      margin-right: 20px;
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 20px;
+      border: 2px solid #d4af37;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .links a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .links a:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .links a:hover {
+      background: linear-gradient(135deg, #d4af37, #f4e5c3);
+      color: #1a1a2e;
+      box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+    }
+
+    a {
+      color: #d4af37;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #f4e5c3;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      padding: 30px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #d4af37;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 -10px 40px rgba(212, 175, 55, 0.2);
+      border-top: 3px solid #d4af37;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+    }
+
+    hr {
+      border: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #d4af37, transparent);
+      margin: 40px 0;
+      box-shadow: 0 1px 10px rgba(212, 175, 55, 0.3);
+    }
+
+    audio {
+      display: none;
+    }
+
+    strong {
+      color: #1a1a2e;
+      font-weight: 600;
+    }
+
+    .profile-info h2 {
+      background: linear-gradient(135deg, #d4af37, #f4e5c3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      border: none;
+      padding: 0;
+      margin-bottom: 15px;
+    }
+
+    .profile-info h2::before {
+      display: none;
+    }
+
+    /* Navigation section styling */
+    .container > h2:last-of-type {
+      margin-top: 50px;
+    }
+
+    .container > p:last-of-type a {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #d4af37, #f4e5c3);
+      color: #1a1a2e;
+      font-weight: 600;
+      font-size: 1.1em;
+      border-radius: 30px;
+      border: 2px solid #d4af37;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .container > p:last-of-type a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+      background: linear-gradient(135deg, #f4e5c3, #d4af37);
+    }
+
+    @media (max-width: 768px) {
+      .profile {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile img {
+        margin-right: 0;
+        margin-bottom: 30px;
+      }
+
+      header h1 {
+        font-size: 2em;
+      }
+
+      .container {
+        width: 95%;
+        padding: 30px;
+      }
+
+      h2 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bathabile Ngxishe</h1>
+  </header>
+
+  <div class="container">
+    <div class="profile">
+      <img src="/images/B.jpg" alt="Bathabile Ngxishe">
+      <div class="profile-info">
+        <h2>💬 About Me / Personal Bio</h2>
+        <p>I am <strong>Bathabile Ngxishe</strong>, a third-year Bachelor of Science student majoring in Physics at Walter Sisulu University. I'm passionate about exploring the intersection between science and technology, with a growing interest in software development, web technologies, artificial intelligence, and cloud computing.</p>
+        <p>My academic background in physics has strengthened my problem-solving and analytical thinking skills, while my curiosity about modern computing drives me to learn programming and data-driven technologies. I aspire to use my knowledge to contribute to innovative research, technology-based solutions, and digital transformation in science and education.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <h2>🎓 Education</h2>
+    <p><strong>Walter Sisulu University</strong><br>
+    Bachelor of Science in Physics (Third Year, 2025)</p>
+    <p><strong>Relevant Courses:</strong> Classical Mechanics, Quantum Physics, Computational Physics, Data Analysis, and Electronics</p>
+    <p>Developing practical lab and research skills alongside programming exposure in Python, Java, and web development basics.</p>
+
+    <hr>
+
+    <h2>💻 Technical & Soft Skills</h2>
+
+    <h3>Technical Skills</h3>
+    <ul>
+      <li><strong>Programming:</strong> Python, Java, HTML, CSS, JavaScript</li>
+      <li><strong>Tools:</strong> Git/GitHub, Visual Studio Code, MATLAB, NetBeans</li>
+      <li><strong>Interests:</strong> Artificial Intelligence, Cloud Computing, Web Development, Data Visualization</li>
+    </ul>
+
+    <h3>Soft Skills</h3>
+    <ul>
+      <li>Critical thinking and analytical reasoning</li>
+      <li>Problem solving through scientific and logical approaches</li>
+      <li>Effective teamwork and collaboration in lab and research environments</li>
+      <li>Time management and adaptability</li>
+    </ul>
+
+    <hr>
+
+    <h2>🧪 Projects / Academic Work</h2>
+    <ul>
+      <li><strong>Physics Data Analysis Project</strong> – Analyzed experimental data from laboratory measurements using Python and Excel to model and visualize physical trends.</li>
+      <li><strong>Hill Cipher Cryptography Project</strong> – Applied linear algebra and matrix operations to encrypt and decrypt messages, demonstrating real-world applications of mathematical concepts.</li>
+      <li><strong>Portfolio Website Project</strong> – Developed a personal website using HTML, CSS, and JavaScript to showcase academic achievements and technical skills.</li>
+      <li><strong>Research Poster on Renewable Energy Materials</strong> – Participated in a group research project exploring efficient solar materials and sustainable technologies.</li>
+    </ul>
+
+    <hr>
+
+    <h2>🚀 Interests & Goals</h2>
+    <p>I'm deeply interested in combining physics, computing, and artificial intelligence to solve real-world scientific and technological challenges. My long-term goal is to become a researcher or developer who bridges the gap between scientific research and innovative digital systems.</p>
+
+    <hr>
+
+    <h2>📫 Contact / Social Links</h2>
+    <ul>
+      <li>📧 Email: <a href="mailto:ngxishebathabile@gmail.com">ngxishebathabile@gmail.com</a></li>
+      <li>🖥️ GitHub: <a href="https://github.com/04-tee" target="_blank">github.com/04-tee</a></li>
+    </ul>
+
+    <hr>
+
+    <h2>Navigation</h2>
+    <p><a href="project.html">View My Team Project</a></p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Bathabile Ngxishe. All rights reserved.</p>
+  </footer>
+
+  <!-- Background music that plays automatically -->
+  <audio autoplay loop>
+    <source src="/sounds/Poizen.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
